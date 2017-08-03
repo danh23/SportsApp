@@ -3,31 +3,20 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Home</ion-title>
+    <ion-title>Login</ion-title>
   </ion-navbar>
 </ion-header>
 
-
-
-<ion-content padding #contentRef (ionScroll)="scrollingFun($event)">
-   
+<ion-content padding>
+  <button ion-button full (click)="facebookLogin()">Login baa</button>
  
-  <ion-item *ngFor="let item of items" >
-
-    <ion-card>
-      <img src="img/profile_picture.png"/>
+  <ion-card *ngIf="userData">
+    <ion-card-header>{{ userData.username }}</ion-card-header>
+    <img [src]="userData.picture" />
     <ion-card-content>
-    <ion-card-title>
-      <h2>Profile {{item.number }}</h2>
-      </ion-card-title>
-    <p>fotbal/volei/atletism</p>
-      <p>
-         <button ion-button item-right color="danger">Chat</button> 
-   <button ion-button item-right color="danger">View profile</button> 
-    </p>
-  </ion-card-content>
-</ion-card>
-    
-  </ion-item>
-  
+      <p>Email: {{ userData.email }}</p>
+      <p>First Name: {{ userData.first_name }}</p>
+    </ion-card-content>
+  </ion-card>
+ 
 </ion-content>

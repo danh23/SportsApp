@@ -1,53 +1,37 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController,ToastController} from 'ionic-angular';
 import { Content } from 'ionic-angular';
+import { MainPage } from '../../pages/pages';
+import { User } from '../../providers/user';
+import { TranslateService } from '@ngx-translate/core';
+import { Auth } from '@ionic/cloud-angular';
+import { Facebook,FacebookLoginResponse } from "@ionic-native/facebook";
+import { NativeStorage } from '@ionic-native/native-storage';
+import { Http,RequestOptions } from "@angular/http";
+import 'rxjs/add/operator/map';
+import { FacebookLoginService } from "../../services/facebookLoginService";
 
 @Component({
   selector: 'page-home',
-  templateUrl: 'home.html'
+  templateUrl: 'home.html',
+  providers: [FacebookLoginService]
 })
 export class HomePage {
   @ViewChild("contentRef") contentHandle: Content;
- 
-  public items = [];
-  private tabBarHeight;
-  private topOrBottom:string;
-  private contentBox;
- 
-  constructor(public navCtrl: NavController) {
-    for (let i = 1; i <= 50; i++) {
-      this.items.push({ "number": i });
-    }
-  }
- 
-  ionViewDidEnter() {
-    this.topOrBottom=this.contentHandle._tabsPlacement;
-    this.contentBox=document.querySelector(".scroll-content")['style'];
-  
-    if (this.topOrBottom == "top") {
-      this.tabBarHeight = this.contentBox.marginTop;
-    } else if (this.topOrBottom == "bottom") {
-      this.tabBarHeight = this.contentBox.marginBottom;
-    }
-  }
- 
-  scrollingFun(e) {
-    if (e.scrollTop > this.contentHandle.getContentDimensions().contentHeight) {
-      document.querySelector(".tabbar")['style'].display = 'none';
-      if (this.topOrBottom == "top") {
-        this.contentBox.marginTop = 0;
-      } else if (this.topOrBottom == "bottom") {
-        this.contentBox.marginBottom = 0;
-      }
- 
-    } else {
-      document.querySelector(".tabbar")['style'].display = 'flex';
-      if (this.topOrBottom == "top") {
-        this.contentBox.marginTop = this.tabBarHeight;
-      } else if (this.topOrBottom == "bottom") {
-        this.contentBox.marginBottom = this.tabBarHeight;
-      }
- 
-    }//if else
-  }//scrollingFun
+
+
+userData: any = null;
+APP_ID: number = 1458461600876986;
+
+oauthBaseUrl = '';
+
+constructor(public navCtrl: NavController, private facebook:Facebook, public nativeStorage: NativeStorage, private http:Http, private facebookService:FacebookLoginService){  
+  this.facebook.browserInit(this.APP_ID);
 }
+
+facebookLogin(){
+   this.facebookService.facebookLogin();
+}
+  
+
+ }
