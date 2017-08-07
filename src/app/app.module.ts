@@ -21,6 +21,10 @@ import { Facebook } from "@ionic-native/facebook";
 import { NativeStorage } from '@ionic-native/native-storage';
 import { HttpModule } from '@angular/http';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { FacebookStorageService } from "../services/facebookStorageService";
+import { FacebookLoginService } from "../services/facebookLoginService";
+
+
 
 @NgModule({
   declarations: [
@@ -52,6 +56,8 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
     GoogleMaps,
     Camera,
     User,
+    FacebookStorageService,
+    FacebookLoginService,
     Geolocation,
     Facebook,
     NativeStorage,
