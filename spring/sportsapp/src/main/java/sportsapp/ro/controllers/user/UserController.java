@@ -1,6 +1,7 @@
 package sportsapp.ro.controllers.user;
 
 import java.security.Principal;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,9 +30,15 @@ public class UserController {
 	  }
 	  
 	  @RequestMapping(value = "/getUserByUsername/{username}" , method = RequestMethod.GET)
-	  public ResponseEntity<User> user(@PathVariable String username) {
+	  public ResponseEntity<User> getAllUsers(@PathVariable String username) {
 		  User user = userService.getUserByUsername(username);  
 	    return new ResponseEntity<User>(user, HttpStatus.OK);
+	  }
+	  
+	  @RequestMapping(value = "/getAllUsers" , method = RequestMethod.GET)
+	  public ResponseEntity<List<User>> user() {
+		  List<User> userList = userService.getAllUsers();  
+	    return new ResponseEntity<List<User>>(userList, HttpStatus.OK);
 	  }
 	  
 	  @RequestMapping(value = "/setUser" , method = RequestMethod.POST)
@@ -40,7 +47,7 @@ public class UserController {
 	    return new ResponseEntity<User>(userResponse, HttpStatus.OK);
 	  }
 	  
-	  @RequestMapping(value = "/getUser" , method = RequestMethod.POST)
+	  @RequestMapping(value = "/getNearbyUsers" , method = RequestMethod.POST)
 	  public ResponseEntity<GetNearbyUsersResponse> getNearbyUsers(GetNearbyUsersRequest request) {
 	    return new ResponseEntity(null, HttpStatus.OK);
 	  }

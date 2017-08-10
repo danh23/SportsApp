@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(name="USERS")
@@ -15,8 +16,12 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)	
 	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
+	
 	private String username;
+	
+	@Column(unique=true)
 	private String email;
+	
 	private String facebookId;
 	
 	public Long getId() {

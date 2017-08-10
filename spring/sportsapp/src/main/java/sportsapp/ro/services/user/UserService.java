@@ -1,5 +1,7 @@
 package sportsapp.ro.services.user;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,5 +21,9 @@ public class UserService {
 	
 	public User setUser(User user) {
 		return userRepository.saveAndFlush(user);
+	}
+	
+	public List<User> getAllUsers(){
+		return userRepository.findAll();
 	}
 }
