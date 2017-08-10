@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Scroll</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+
+<ion-content padding #contentRef (ionScroll)="scrollingFun($event)">
+   
+ 
+  <ion-item *ngFor="let item of items" >
+
+    <ion-card>
+      <img src="img/profile_picture.png"/>
+    <ion-card-content>
+    <ion-card-title>
+      <h2>Profile {{item.number }}</h2>
+    </ion-card-title>
+    <p>fotbal/volei/atletism</p>
+      <p>
+         <button ion-button item-right color="danger">Chat</button> 
+         <button ion-button item-right color="danger">View profile</button> 
+    </p>
+  </ion-card-content>
+</ion-card>
+    
+  </ion-item>
+  
+</ion-content>
