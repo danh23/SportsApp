@@ -26,7 +26,7 @@ public class UserFriends implements Serializable{
 	private Integer id;
 	
 	private Integer user;
-	private User friend;
+	private Integer friend;
 	
 	public Integer getUserId() {
 		return user;
@@ -37,10 +37,10 @@ public class UserFriends implements Serializable{
 	
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="id")
-	public User getFriendId() {
+	public Integer getFriendId() {
 		return friend;
 	}
-	public void setFriendId(User friend) {
+	public void setFriendId(Integer friend) {
 		this.friend = friend;
 	}
 	
