@@ -10,6 +10,9 @@ import { MapGooglePage } from '../pages/mapGoogle/mapGoogle';
 import { EventsPage } from '../pages/events/events';
 import { ContentPage } from '../pages/content/content';
 import { LoginPage } from '../pages/login/login';
+import { ProfilePage } from "../pages/profile/profile";
+import { FacebookStorageService } from "../services/facebookStorageService";
+import { FacebookLoginService } from "../services/facebookLoginService";
 
 
 @Component({
@@ -18,11 +21,15 @@ import { LoginPage } from '../pages/login/login';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;
+  rootPage: any = ProfilePage;
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, 
+    public statusBar: StatusBar,
+     public splashScreen: SplashScreen,
+     private facebookStorage: FacebookStorageService,
+     private facebookService:FacebookLoginService) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -31,9 +38,12 @@ export class MyApp {
       { title: 'Friends', component: ListFriendsPage },
       { title: 'Search new friends', component: ScrollPage },
        { title: 'Map', component: MapGooglePage },
-       {title: 'Events', component: EventsPage}
+       {title: 'Events', component: EventsPage},
+       {title: 'Profile', component: ProfilePage}
     ];
 
+    if (this.facebookService.loggedIn() == false)
+      this.rootPage = LoginPage;
   }
 
   initializeApp() {

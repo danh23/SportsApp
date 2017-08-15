@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Profil</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content class="card-background-page">
+ 
+  <ion-card *ngIf="userData">
+    <img [src]="userData.picture" />
+    <div class="card-title">{{userData.first_name}} {{userData.last_name}}</div>
+    <div class="card-subtitle_first">
+      Bucuresti
+    </div>
+    <div class="card-subtitle_second">
+        <img class="format_img_profile" [src]="userData.picture" />
+    </div>
+  </ion-card>
+  <ion-card >
+    
+    <div style="height:30px;" class="nume">
+     <span style="float:left"> Sporturi preferate</span>
+     <div class="card-subtitle_third">
+      <img class="format_img_sport" style="display: inline; margin: 0 5px;" [src]="userData.picture" />
+      <img class="format_img_sport" style="display: inline; margin: 0 5px;" [src]="userData.picture" />
+      <img class="format_img_sport" style="display: inline; margin: 0 5px;" [src]="userData.picture" />
+    </div>
+    </div>
+   
+  </ion-card>
+  <ion-card >
+    
+    <div>
+     <span> Prieteni</span>
+    </div>
+   
+  </ion-card>
+
+  <p>
+    <button ion-button item-right color="danger" (click)="editProfile()">Edit</button>
+  </p>
+</ion-content>

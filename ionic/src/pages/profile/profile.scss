@@ -1,0 +1,68 @@
+page-profile {
+   
+
+    .card-background-page {
+        
+      .format_img_cover{
+        
+        height: 400px;
+        width:400px;
+        
+                }
+
+        .format_img_profile{
+            
+            height: 100px;
+            width:100px;
+            
+         }
+
+         .nume{
+          display: inline-block;
+          width:100%;
+         }
+         .format_img_sport{
+          
+          height: 30px;
+          width:30px;
+          
+       }
+                    
+          ion-card {
+            position: relative;
+            text-align: center;
+          }
+        
+          .card-title {
+            position: absolute;
+            top: 36%;
+            font-size: 2.0em;
+            width: 100%;
+            font-weight: bold;
+            color: #fff;
+          }
+          .card-subtitle_first {
+            font-size: 1.0em;
+            position: absolute;
+            top: 52%;
+            width: 100%;
+            color: #fff;
+          }
+          .card-subtitle_second{
+            font-size: 1.0em;
+            position: absolute;
+            bottom: 0px;
+            right: 0px;
+            color: #fff;
+          }
+
+          .card-subtitle_third{
+            font-size: 1.0em;
+            position: absolute;
+            bottom: 0px;
+            right: 0px;
+            color: #fff;
+          }
+        
+        }
+}

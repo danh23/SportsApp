@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Content } from 'ionic-angular';
+import { ServerDataService } from "../../services/serverDataService";
 //import { ServerData } from "../../services/serverDataService";
 
 @Component({
@@ -15,15 +16,12 @@ export class ScrollPage {
   private topOrBottom:string;
   private contentBox;
  
-  constructor(public navCtrl: NavController//, private serverData:ServerData
+  constructor(public navCtrl: NavController, private serverDataService:ServerDataService
   ) {
-    for (let i = 1; i <= 20; i++) {
-      this.items.push({ "number": i });
-    }
-
-    //serverData.getUser().subscribe(res =>{
-      //console.log(res);
-    //});
+    
+    serverDataService.getAllUsers().subscribe(res =>{
+      this.items = res;
+    });
   }
  
   ionViewDidEnter() {
