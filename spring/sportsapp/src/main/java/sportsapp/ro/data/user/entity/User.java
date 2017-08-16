@@ -1,16 +1,15 @@
 package sportsapp.ro.data.user.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
-
-import sportsapp.ro.data.user_friends.entity.UserFriends;
 
 @Entity
 @Table(name="USERS")
@@ -33,6 +32,28 @@ public class User {
 	private String city;
 	private String country;
 	
+	
+	private User currentUser;
+	
+	
+	private List<User> friends;
+	
+	
+	@ManyToOne
+	public User getCurrentUser() {
+		return currentUser;
+	}
+	public void setCurrentUser(User currentUser) {
+		this.currentUser = currentUser;
+	}
+	
+	@OneToMany(mappedBy="currentUser")
+	public List<User> getFriends() {
+		return friends;
+	}
+	public void setFriends(List<User> friends) {
+		this.friends = friends;
+	}
 	public Long getId() {
 		return id;
 	}

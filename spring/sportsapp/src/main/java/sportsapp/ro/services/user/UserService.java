@@ -9,6 +9,7 @@ import sportsapp.ro.data.user.UserRepository;
 import sportsapp.ro.data.user.entity.User;
 import sportsapp.ro.data.user_friends.UserFriendsRepository;
 import sportsapp.ro.data.user_friends.entity.UserFriends;
+import sportsapp.ro.exception.CustomException;
 
 @Service
 public class UserService {
@@ -24,18 +25,22 @@ public class UserService {
 	}
 	
 	public User setUser(User user) {
-		User dbUser = userRepository.findOneByUsername(user.getUsername());
-		if(dbUser != null) {
-			dbUser.setCity(user.getCity());
-			dbUser.setCountry(user.getCountry());
-			dbUser.setEmail(user.getEmail());
-			dbUser.setFacebookId(user.getFacebookId());
-			dbUser.setFirstName(user.getFirstName());
-			dbUser.setLastName(user.getLastName());
-			dbUser.setUsername(user.getUsername());
-			return userRepository.saveAndFlush(dbUser);
+		try{
+			User dbUser = userRepository.findOneByUsername(user.getUsername());
+			if(dbUser != null) {
+				dbUser.setCity(user.getCity());
+				dbUser.setCountry(user.getCountry());
+				dbUser.setEmail(user.getEmail());
+				dbUser.setFacebookId(user.getFacebookId());
+				dbUser.setFirstName(user.getFirstName());
+				dbUser.setLastName(user.getLastName());
+				dbUser.setUsername(user.getUsername());
+				return userRepository.saveAndFlush(dbUser);
+			}
+			return userRepository.saveAndFlush(user);
+		} catch(Exception e){
+			throw new CustomException(0, e.getMessage());
 		}
-		return userRepository.saveAndFlush(user);
 	}
 	
 	public List<User> getAllUsers(){

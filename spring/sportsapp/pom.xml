@@ -62,11 +62,11 @@
 			<groupId>org.springframework.security.oauth</groupId>
 			<artifactId>spring-security-oauth2</artifactId>
 		</dependency>
-		<dependency>
+<!-- 		<dependency>
             <groupId>com.oracle</groupId>
             <artifactId>ojdbc8</artifactId>
             <version>12.1.0.2</version>
-        </dependency>
+        </dependency> -->
 	</dependencies>
 
 	<build>
