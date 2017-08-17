@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import ro.orange.qmservices.exception.QmBusinessException;
-import ro.orange.qmservices.exception.QmTechnicalException;
 import sportsapp.ro.controllers.user.bean.GetNearbyUsersRequest;
 import sportsapp.ro.controllers.user.bean.GetNearbyUsersResponse;
 import sportsapp.ro.data.user.entity.User;

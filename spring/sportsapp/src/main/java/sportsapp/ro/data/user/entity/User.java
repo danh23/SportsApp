@@ -32,28 +32,6 @@ public class User {
 	private String city;
 	private String country;
 	
-	
-	private User currentUser;
-	
-	
-	private List<User> friends;
-	
-	
-	@ManyToOne
-	public User getCurrentUser() {
-		return currentUser;
-	}
-	public void setCurrentUser(User currentUser) {
-		this.currentUser = currentUser;
-	}
-	
-	@OneToMany(mappedBy="currentUser")
-	public List<User> getFriends() {
-		return friends;
-	}
-	public void setFriends(List<User> friends) {
-		this.friends = friends;
-	}
 	public Long getId() {
 		return id;
 	}
