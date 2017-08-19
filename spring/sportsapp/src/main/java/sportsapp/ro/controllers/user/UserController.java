@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import sportsapp.ro.controllers.user.bean.GetNearbyUsersRequest;
@@ -31,9 +32,9 @@ public class UserController {
 	    return new ResponseEntity(principal, HttpStatus.OK);
 	  }
 	  
-	  @RequestMapping(value = "/getUserByUsername/{username}" , method = RequestMethod.GET)
-	  public ResponseEntity<User> getAllUsers(@PathVariable String username) {
-		  User user = userService.getUserByUsername(username);  
+	  @RequestMapping(value = "/getUserByEmail" , method = RequestMethod.POST)
+	  public ResponseEntity<User> getUserByEmail(@RequestBody String email) {
+		  User user = userService.getUserByEmail(email);  
 	    return new ResponseEntity<User>(user, HttpStatus.OK);
 	  }
 	  
@@ -50,7 +51,7 @@ public class UserController {
 	  }
 	  
 	  @RequestMapping(value = "/setUser" , method = RequestMethod.POST)
-	  public ResponseEntity<User> user(@RequestBody User user) throws CustomException {
+	  public ResponseEntity<User> setUser(@RequestBody User user) throws CustomException {
 		  User userResponse = userService.setUser(user);  
 	    return new ResponseEntity<User>(userResponse, HttpStatus.OK);
 	  }
