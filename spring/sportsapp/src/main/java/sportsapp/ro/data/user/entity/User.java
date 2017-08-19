@@ -14,6 +14,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import sportsapp.ro.data.sport.entity.Sport;
 
 @Entity
@@ -37,10 +40,22 @@ public class User {
 	private String city;
 	private String country;
 	
-	@ManyToMany()
+	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(name = "user_sports")
+	@JsonBackReference
 	private List<Sport> sport;
 	
+	@ManyToMany(fetch=FetchType.LAZY)
+	@JoinTable(name = "user_friends")
+	@JsonBackReference
+	private List<User> friend;
+
+	public List<User> getFriend() {
+		return friend;
+	}
+	public void setFriend(List<User> friend) {
+		this.friend = friend;
+	}
 	public List<Sport> getSport() {
 		return sport;
 	}

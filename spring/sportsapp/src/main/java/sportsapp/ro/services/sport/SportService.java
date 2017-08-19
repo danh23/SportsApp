@@ -23,4 +23,8 @@ public class SportService {
 	public List<Sport> getAllSports(){
 		return sportRepository.findAll();
 	}
+	
+	public List<Sport> getSportsByUserId(Long id){
+		return sportRepository.findByUser_Id(id);
+	}
 }

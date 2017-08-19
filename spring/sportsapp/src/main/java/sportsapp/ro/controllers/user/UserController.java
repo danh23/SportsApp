@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import sportsapp.ro.controllers.user.bean.GetNearbyUsersRequest;
 import sportsapp.ro.controllers.user.bean.GetNearbyUsersResponse;
+import sportsapp.ro.data.sport.entity.Sport;
 import sportsapp.ro.data.user.entity.User;
 import sportsapp.ro.data.user_friends.entity.UserFriends;
 import sportsapp.ro.exception.CustomException;
@@ -38,11 +39,19 @@ public class UserController {
 	    return new ResponseEntity<User>(user, HttpStatus.OK);
 	  }
 	  
+	  @RequestMapping(value = "/getUserSportsById" , method = RequestMethod.POST)
+	  public ResponseEntity<List<Sport>> getUserSportsById(@RequestBody Long id) {
+		  List<Sport> userSports = userService.getUserSports(id);  
+	    return new ResponseEntity<>(userSports, HttpStatus.OK);
+	  }
+	  
 	  @RequestMapping(value = "/getUserFriendsById/{userId}" , method = RequestMethod.GET)
 	  public ResponseEntity<List<UserFriends>> getAllUsers(@PathVariable Integer userId) {
 		  List<UserFriends> user = userService.getUserFriends(userId);  
 	    return new ResponseEntity<>(user, HttpStatus.OK);
 	  }
+	  
+	  
 	  
 	  @RequestMapping(value = "/getAllUsers" , method = RequestMethod.GET)
 	  public ResponseEntity<List<User>> user() {

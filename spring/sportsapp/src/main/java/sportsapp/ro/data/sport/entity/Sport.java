@@ -13,6 +13,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import sportsapp.ro.data.user.entity.User;
 
 @Entity
@@ -28,8 +31,10 @@ public class Sport implements Serializable {
 	
 	private String name;
 	
-/*	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(name = "user_sports")
+	@JsonBackReference
+	@JsonIgnore
 	private List<User> user;
 	
 	
@@ -39,7 +44,7 @@ public class Sport implements Serializable {
 
 	public void setUsers(List<User> users) {
 		this.user = users;
-	}*/
+	}
 
 	public Integer getId() {
 		return id;
