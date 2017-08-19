@@ -23,19 +23,29 @@ export class ServerDataService{
     //    return this.http.get(this.url, this.options).map(res => res.json()); 
     //}
 
-    setUser(username, email, facebookId){
+    setUser(username, email, facebookId, first_name, last_name, city){
       
+
+     // console.log("a intrat");
      let headers = new Headers();
       headers.append('Content-Type', 'application/json');
       headers.append('Authorization', 'Basic dXNlcjpwYXNzd29yZA==');
 
       let options = new RequestOptions({ headers: headers });
 
+//console.log(first_name, last_name);
+
       let body = {
-        "username": username, 
+        "firstName": first_name, 
         "email": email,
-        "facebookId": facebookId
+        "facebookId": facebookId,
+        "lastName": last_name,
+        "city": city,
+        "username": username,
+        "country": "Romania"
       }
+
+     console.log(body);
       return this.http.post(this.url + this.setForUser, JSON.stringify(body),options).map(
         data => data.json());
     

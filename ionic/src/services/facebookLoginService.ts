@@ -4,7 +4,6 @@ import { Injectable } from "@angular/core";
 import { Http,RequestOptions } from "@angular/http";
 import 'rxjs/add/operator/map';
 import { InAppBrowser, InAppBrowserObject } from '@ionic-native/in-app-browser';
-import { Storage } from '@ionic/storage';
 import { NativeStorage } from "@ionic-native/native-storage";
 
 
@@ -25,18 +24,18 @@ facebookLogin() {
          
         let loginWindow: InAppBrowserObject = this.iab.create(oauthLoginUrl, '_blank', 'location=no,toolbar=no');
         
-        console.log(this.storage.getItem('token'));
+       // console.log(this.storage.getItem('token'));
 
         if (this.storage.getItem('token') == null){
 
                 //console.log("Login 3");
                 loginWindow.on('loadstop').subscribe((event) => {
                 
-                    console.log(event.url);
+                    //console.log(event.url);
                         let url = event.url;
                         var codeIndex = url.indexOf("code=");
                         var code = url.substring(codeIndex + 5, url.length);
-                        console.log(code);
+                        //console.log(code);
                         //
                         this.getAccessToken(code, loginWindow);
                 });

@@ -24,11 +24,12 @@
       </ion-toolbar>
   </ion-item>
 
-
+  <form [formGroup]="editProfileForm" (ngSubmit)="onSubmit()">
   <ion-item  *ngIf="userData">
     <ion-label fixed>Username</ion-label>
-    <ion-input type="text" value="{{userData.first_name}}"></ion-input>
+    <ion-input type="text" [(ngModel)]="userData.first_name" formControlName="username" name="username"></ion-input>
   </ion-item>
+  </form>
 
   <ion-item>
     <ion-label>Sporturi</ion-label>
@@ -43,7 +44,7 @@
   </ion-item>
 
   <p>
-    <button ion-button item-right color="danger">Save</button> 
+    <button ion-button item-right color="danger" (click)="saveEditProfile()">Save</button> 
     <button ion-button item-right color="danger" (click)="backButton()">Inapoi</button> 
 </p>
 </ion-content>

@@ -13,6 +13,7 @@ import { FacebookLoginService } from "../../services/facebookLoginService";
 import { FacebookStorageService } from "../../services/facebookStorageService";
 import { ServerDataService } from "../../services/serverDataService";
 import { EditProfilePage } from "../editProfile/editProfile";
+import { ListFriendsPage } from "../listFriends/listFriends";
 
 @Component({
   selector: 'page-profile',
@@ -52,6 +53,11 @@ export class ProfilePage implements OnInit {
 
     this.navCtrl.setRoot(EditProfilePage);
   }
+
+  getSports(){
+    
+        this.navCtrl.setRoot(ListFriendsPage);
+      }
   
   getUserProfile(){
 
@@ -62,14 +68,15 @@ export class ProfilePage implements OnInit {
         this.userData.email = res.email;
         this.userData.first_name = res.first_name;
         this.userData.picture = res.picture.data.url;
-        this.userData.id = res.id;
-        //this.userData.city = res.hometown.name;
+        this.userData.facebookId = res.facebookId;
+        this.userData.city = "Bucuresti";
         this.userData.last_name = res.last_name;
+        this.userData.username = res.username;
 
        // console.log(this.userData);
         if (this.facebookService.loggedIn() == false){
-          this.serviceData.setUser(this.userData.first_name, this.userData.email, this.userData.id).subscribe(res => {
-            console.log(res);
+          this.serviceData.setUser(this.userData.username,this.userData.email, this.userData.facebookId, this.userData.first_name, this.userData.last_name, this.userData.city).subscribe(res => {
+           // console.log(res);
                 });
               }
       });
@@ -82,17 +89,16 @@ class UserData {
   last_name: string;
   city: string;
   picture: string; 
-  id: string;
+  facebookId: string;
+  username: string;
 }
 
 interface IUserData {
   email: string;  
   first_name: string;
   last_name: string;
-  hometown: {
-      name: string;
-  };
-  id: string;
+  facebookId: string;
+  username: string;
   picture: {
     data: {
       url: string;

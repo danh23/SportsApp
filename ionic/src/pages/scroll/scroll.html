@@ -14,13 +14,16 @@
  
   <ion-item *ngFor="let item of items" >
 
+
+    
     <ion-card>
-      <img src="img/profile_picture.png"/>
+      <img src="C:\Users\andre\Desktop\Libertas\ionic\www\assets\img\cover.jpg"/>
     <ion-card-content>
     <ion-card-title>
-      <h2>Profile {{item.username }}</h2>
+   
+      <h1>{{item.firstName}} {{item.lastName}}</h1>
     </ion-card-title>
-    <p>fotbal/volei/atletism</p>
+    <p>{{item.city}}</p>
       <p>
          <button ion-button item-right color="danger">Chat</button> 
          <button ion-button item-right color="danger">View profile</button> 

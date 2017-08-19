@@ -17,6 +17,7 @@ import { File } from '@ionic-native/file';
 import { Transfer, TransferObject } from '@ionic-native/transfer';
 import { FilePath } from '@ionic-native/file-path';
 import { Camera } from '@ionic-native/camera';
+import {FormGroup, FormBuilder, FormControl, Validators} from "@angular/forms";
 
 declare var cordova: any;
 
@@ -33,6 +34,10 @@ export class EditProfilePage implements OnInit {
   APP_ID: number = 1458461600876986;
   lastImage: string = null;
   loading: Loading;
+  editProfileForm: FormGroup = new FormGroup ({
+    username: new FormControl()
+  });
+
 
   oauthBaseUrl = '';
 
@@ -50,7 +55,8 @@ export class EditProfilePage implements OnInit {
               public actionSheetCtrl: ActionSheetController,
               public toastCtrl: ToastController, 
               public platform: Platform, 
-              public loadingCtrl: LoadingController){  
+              public loadingCtrl: LoadingController,
+              public formBuilder: FormBuilder){  
     
                 this.facebook.browserInit(this.APP_ID);
 
@@ -58,11 +64,27 @@ export class EditProfilePage implements OnInit {
 
   ngOnInit(){
 
-    //console.log("a intrat");
+     
+    
     this.getUserProfile();
   }
 
+  usernameValidator(control: FormControl): {[s: string]: boolean} {
+    if (!control.value.match("^[a-zA-Z ,.'-]+$")) {
+      return {invalidName: true};
+    }
+  }
+
   backButton(){
+    this.navCtrl.setRoot(ProfilePage);
+  }
+
+  saveEditProfile(){
+   
+    //console.log(this.editProfileForm);
+    //console.log(this.editProfileForm.controls.username.value);
+    console.log(this.userData.first_name);
+    this.serviceData.setUser(this.editProfileForm.controls.username.value, this.userData.email, this.userData.facebookId, this.userData.first_name, this.userData.last_name, this.userData.city);
     this.navCtrl.setRoot(ProfilePage);
   }
 
@@ -72,8 +94,13 @@ export class EditProfilePage implements OnInit {
     this.facebookStorage.getUserProfile().subscribe(
       (res:IUserData)=>{
         
+        this.userData.email = res.email;
         this.userData.first_name = res.first_name;
-        
+        this.userData.picture = res.picture.data.url;
+        this.userData.facebookId = res.facebookId;
+        this.userData.city = "Bucuresti";
+        this.userData.last_name = res.last_name;
+        this.userData.username = res.username;
       });
   }
 
@@ -204,10 +231,25 @@ export class EditProfilePage implements OnInit {
 }
 
 class UserData {
-  first_name:string;
+  email: string;  
+  first_name: string;
+  last_name: string;
+  city: string;
+  picture: string; 
+  facebookId: string;
+  username: string;
 }
 
 interface IUserData {
-  first_name:string;
-}
+  email: string;  
+  first_name: string;
+  last_name: string;
+  facebookId: string;
+  username: string;
+  picture: {
+    data: {
+      url: string;
+    }
+  }
 
+}
