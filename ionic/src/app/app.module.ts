@@ -23,7 +23,12 @@ import { HttpModule } from '@angular/http';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { FacebookStorageService } from "../services/facebookStorageService";
 import { FacebookLoginService } from "../services/facebookLoginService";
-
+import { ProfilePage } from "../pages/profile/profile";
+import { ServerDataService } from "../services/serverDataService";
+import { EditProfilePage } from "../pages/editProfile/editProfile";
+import { File } from '@ionic-native/file';
+import { Transfer, TransferObject } from '@ionic-native/transfer';
+import { FilePath } from '@ionic-native/file-path';
 
 
 @NgModule({
@@ -34,6 +39,9 @@ import { FacebookLoginService } from "../services/facebookLoginService";
     ScrollPage,
     MapGooglePage,
     EventsPage,
+    ProfilePage,
+    LoginPage,
+    EditProfilePage,
   ],
   imports: [
     BrowserModule,
@@ -48,7 +56,10 @@ import { FacebookLoginService } from "../services/facebookLoginService";
     ListFriendsPage,
     ScrollPage,
     MapGooglePage,
-    EventsPage
+    EventsPage,
+    ProfilePage,
+    LoginPage,
+    EditProfilePage
   ],
   providers: [
     StatusBar,
@@ -58,10 +69,15 @@ import { FacebookLoginService } from "../services/facebookLoginService";
     User,
     FacebookStorageService,
     FacebookLoginService,
+    ServerDataService,
     Geolocation,
     Facebook,
     NativeStorage,
     InAppBrowser,
+    File,
+    FilePath,
+    Transfer,
+    TransferObject,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

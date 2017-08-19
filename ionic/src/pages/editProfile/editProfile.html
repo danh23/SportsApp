@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Editare profil</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+
+  <ion-item>
+    <img src="{{pathForImage(lastImage)}}" style="width: 100%" [hidden]="lastImage === null">
+    <h3 [hidden]="lastImage !== null">Please Select Image!</h3>
+  
+    <ion-toolbar color="primary">
+        <ion-buttons>
+          <button ion-button icon-left (click)="presentActionSheet()">
+            <ion-icon name="camera"></ion-icon>Select Image
+          </button>
+          <button ion-button icon-left (click)="uploadImage()" [disabled]="lastImage === null">
+            <ion-icon name="cloud-upload"></ion-icon>Upload
+          </button>
+        </ion-buttons>
+      </ion-toolbar>
+  </ion-item>
+
+  <form [formGroup]="editProfileForm" (ngSubmit)="onSubmit()">
+  <ion-item  *ngIf="userData">
+    <ion-label fixed>Username</ion-label>
+    <ion-input type="text" [(ngModel)]="userData.first_name" formControlName="username" name="username"></ion-input>
+  </ion-item>
+  </form>
+
+  <ion-item>
+    <ion-label>Sporturi</ion-label>
+    <ion-select [(ngModel)]="toppings" multiple="true">
+      <ion-option>Fotbal</ion-option>
+      <ion-option>Volei</ion-option>
+      <ion-option>Baschet</ion-option>
+      <ion-option>Atletism</ion-option>
+      <ion-option>Popice</ion-option>
+      <ion-option>Handbal</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <p>
+    <button ion-button item-right color="danger" (click)="saveEditProfile()">Save</button> 
+    <button ion-button item-right color="danger" (click)="backButton()">Inapoi</button> 
+</p>
+</ion-content>
+
