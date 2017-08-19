@@ -19,14 +19,14 @@ public class UserService {
 	
 	@Autowired UserFriendsRepository userFriendsRepository;
 	
-	public User getUserByUsername(String username) {
-		User user = userRepository.findOneByUsername(username);
+	public User getUserByEmail(String email) {
+		User user = userRepository.findOneByEmail(email);
 		return user;
 	}
 	
 	public User setUser(User user) {
 		try{
-			User dbUser = userRepository.findOneByUsername(user.getUsername());
+			User dbUser = userRepository.findOneByEmail(user.getEmail());
 			if(dbUser != null) {
 				dbUser.setCity(user.getCity());
 				dbUser.setCountry(user.getCountry());

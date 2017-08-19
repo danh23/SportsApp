@@ -3,12 +3,13 @@ package sportsapp.ro.data.sport.entity;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -26,6 +27,19 @@ public class Sport implements Serializable {
 	private Integer id;
 	
 	private String name;
+	
+/*	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "user_sports")
+	private List<User> user;
+	
+	
+	public List<User> getUsers() {
+		return user;
+	}
+
+	public void setUsers(List<User> users) {
+		this.user = users;
+	}*/
 
 	public Integer getId() {
 		return id;
