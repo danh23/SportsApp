@@ -8,5 +8,5 @@ import sportsapp.ro.data.user.entity.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long>{
 
-	public User findOneByUsername(String username);
+	public User findOneByEmail(String email);
 }

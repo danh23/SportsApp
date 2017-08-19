@@ -4,12 +4,17 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import sportsapp.ro.data.sport.entity.Sport;
 
 @Entity
 @Table(name="USERS")
@@ -32,6 +37,16 @@ public class User {
 	private String city;
 	private String country;
 	
+	@ManyToMany()
+	@JoinTable(name = "user_sports")
+	private List<Sport> sport;
+	
+	public List<Sport> getSport() {
+		return sport;
+	}
+	public void setSport(List<Sport> sport) {
+		this.sport = sport;
+	}
 	public Long getId() {
 		return id;
 	}
