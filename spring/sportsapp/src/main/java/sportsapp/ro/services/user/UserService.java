@@ -5,6 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import sportsapp.ro.controllers.user.bean.request.SetUserSportsRequest;
+import sportsapp.ro.controllers.user.bean.response.SetUserSportsResponse;
+import sportsapp.ro.data.sport.SportRepository;
+import sportsapp.ro.data.sport.entity.Sport;
 import sportsapp.ro.data.user.UserRepository;
 import sportsapp.ro.data.user.entity.User;
 import sportsapp.ro.data.user_friends.UserFriendsRepository;
@@ -17,10 +21,15 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 	
-	@Autowired UserFriendsRepository userFriendsRepository;
+	@Autowired 
+	private SportRepository sportRepository;
+	
+	@Autowired 
+	private UserFriendsRepository userFriendsRepository;
 	
 	public User getUserByEmail(String email) {
 		User user = userRepository.findOneByEmail(email);
+		user.getFriend();
 		return user;
 	}
 	
@@ -49,5 +58,19 @@ public class UserService {
 	
 	public List<UserFriends> getUserFriends(Integer userId){
 		return userFriendsRepository.findByUser(userId);
+	}
+	
+	public List<Sport> getUserSports(Long id) {
+		User user = userRepository.findOne(id);
+		return user.getSports();
+	}
+
+	public SetUserSportsResponse setUserSports(SetUserSportsRequest request) {
+		SetUserSportsResponse response = new SetUserSportsResponse();
+		User user = userRepository.findOne(request.getUserId());
+		user.setSports(request.getSports());
+		userRepository.saveAndFlush(user);
+		response.setSports(user.getSports());
+		return response;
 	}
 }
