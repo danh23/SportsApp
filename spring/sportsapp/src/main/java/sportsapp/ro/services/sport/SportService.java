@@ -25,6 +25,6 @@ public class SportService {
 	}
 	
 	public List<Sport> getSportsByUserId(Long id){
-		return sportRepository.findByUser_Id(id);
+		return null;
 	}
 }

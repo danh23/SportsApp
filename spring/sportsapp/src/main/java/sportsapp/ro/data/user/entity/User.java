@@ -8,6 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -15,6 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import sportsapp.ro.data.sport.entity.Sport;
@@ -23,45 +25,42 @@ import sportsapp.ro.data.sport.entity.Sport;
 @Table(name="USERS")
 public class User {
 
-	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)	
-	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
-	
 	private String username;
-	
-	@Column(unique=true)
-	private String email;
-	
-	private String facebookId;
-	
+	private String email;	
+	private String facebookId;	
 	private String firstName;
 	private String lastName;
 	private String city;
 	private String country;
-	
-	@ManyToMany(fetch=FetchType.LAZY)
-	@JoinTable(name = "user_sports")
-	@JsonBackReference
-	private List<Sport> sport;
-	
-	@ManyToMany(fetch=FetchType.LAZY)
-	@JoinTable(name = "user_friends")
-	@JsonBackReference
+	private List<Sport> sports;
 	private List<User> friend;
-
+	
+	@ManyToMany(fetch=FetchType.LAZY)
+	@JoinTable(name="user_friends", joinColumns = { @JoinColumn(name = "user_id", referencedColumnName = "id")}, inverseJoinColumns = {
+	@JoinColumn(name = "friend_id", referencedColumnName = "id")})
+	@JsonIgnore
 	public List<User> getFriend() {
 		return friend;
 	}
 	public void setFriend(List<User> friend) {
 		this.friend = friend;
 	}
-	public List<Sport> getSport() {
-		return sport;
+	
+	@ManyToMany(fetch=FetchType.LAZY)
+	@JoinTable(name="user_sports", joinColumns = { @JoinColumn(name = "user_id", referencedColumnName = "id")}, 
+		inverseJoinColumns = { @JoinColumn(name = "sport_id", referencedColumnName = "id")})
+	@JsonBackReference
+	public List<Sport> getSports() {
+		return sports;
 	}
-	public void setSport(List<Sport> sport) {
-		this.sport = sport;
+	public void setSports(List<Sport> sports) {
+		this.sports = sports;
 	}
+	
+	@Id
+    @GeneratedValue(strategy = GenerationType.AUTO)	
+	@Column(name = "id", unique = true, nullable = false)
 	public Long getId() {
 		return id;
 	}
@@ -74,6 +73,8 @@ public class User {
 	public void setUsername(String username) {
 		this.username = username;
 	}
+	
+	@Column(unique=true)
 	public String getEmail() {
 		return email;
 	}

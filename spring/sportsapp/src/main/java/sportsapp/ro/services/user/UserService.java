@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import sportsapp.ro.controllers.user.bean.request.SetUserSportsRequest;
+import sportsapp.ro.controllers.user.bean.response.SetUserSportsResponse;
 import sportsapp.ro.data.sport.SportRepository;
 import sportsapp.ro.data.sport.entity.Sport;
 import sportsapp.ro.data.user.UserRepository;
@@ -60,6 +62,15 @@ public class UserService {
 	
 	public List<Sport> getUserSports(Long id) {
 		User user = userRepository.findOne(id);
-		return user.getSport();
+		return user.getSports();
+	}
+
+	public SetUserSportsResponse setUserSports(SetUserSportsRequest request) {
+		SetUserSportsResponse response = new SetUserSportsResponse();
+		User user = userRepository.findOne(request.getUserId());
+		user.setSports(request.getSports());
+		userRepository.saveAndFlush(user);
+		response.setSports(user.getSports());
+		return response;
 	}
 }

@@ -10,6 +10,5 @@ import sportsapp.ro.data.sport.entity.Sport;
 @Repository
 public interface SportRepository extends JpaRepository<Sport, Integer>{
 	
-	public List<Sport> findByUser_Id(Long id);
 
 }
