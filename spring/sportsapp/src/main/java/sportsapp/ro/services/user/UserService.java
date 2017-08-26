@@ -3,8 +3,12 @@ package sportsapp.ro.services.user;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import sportsapp.ro.controllers.user.bean.request.DeleteUserSportRequest;
 import sportsapp.ro.controllers.user.bean.request.SetUserSportsRequest;
 import sportsapp.ro.controllers.user.bean.response.SetUserSportsResponse;
 import sportsapp.ro.data.sport.SportRepository;
@@ -56,13 +60,19 @@ public class UserService {
 		return userRepository.findAll();
 	}
 	
-	public List<UserFriends> getUserFriends(Integer userId){
-		return userFriendsRepository.findByUser(userId);
+	public List<User> getUserFriends(Long userId){
+		User user = userRepository.findOne(userId);
+		return user.getFriend();
 	}
 	
 	public List<Sport> getUserSports(Long id) {
 		User user = userRepository.findOne(id);
 		return user.getSports();
+	}
+	
+	public Page<User> getAllUsersBySport(Integer sportId) {
+		Pageable page = new PageRequest(0, 10);
+		return userRepository.findAllUsersBySports_Id(sportId, page);
 	}
 
 	public SetUserSportsResponse setUserSports(SetUserSportsRequest request) {
@@ -73,4 +83,12 @@ public class UserService {
 		response.setSports(user.getSports());
 		return response;
 	}
+
+	public void deleteUserSport(DeleteUserSportRequest request) {
+		User user = userRepository.findOne(request.getUserId());
+		Sport sport = sportRepository.findOne(request.getSportId());
+		user.getSports().remove(sport);
+		userRepository.saveAndFlush(user);
+	}
+
 }

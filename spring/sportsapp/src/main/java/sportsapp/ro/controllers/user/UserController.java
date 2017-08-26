@@ -4,6 +4,7 @@ import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import sportsapp.ro.controllers.user.bean.request.DeleteUserSportRequest;
 import sportsapp.ro.controllers.user.bean.request.GetNearbyUsersRequest;
 import sportsapp.ro.controllers.user.bean.request.SetUserSportsRequest;
 import sportsapp.ro.controllers.user.bean.response.GetNearbyUsersResponse;
@@ -47,15 +49,26 @@ public class UserController {
 	    return new ResponseEntity<>(userSports, HttpStatus.OK);
 	  }
 	  
+		@RequestMapping(value = "/getAllUsersBySport/{sportId}" , method = RequestMethod.GET)
+		public ResponseEntity<Page<User>> getAllUsersBySports(@PathVariable Integer sportId) {
+			Page<User> users = userService.getAllUsersBySport(sportId);  
+		    return new ResponseEntity<>(users, HttpStatus.OK);
+		} 
+	  
 	  @RequestMapping(value = "/setUserSportsById" , method = RequestMethod.POST)
 	  public ResponseEntity<SetUserSportsResponse> setUserSportsById(@RequestBody SetUserSportsRequest request) {
 		SetUserSportsResponse userSports = userService.setUserSports(request);  
 	    return new ResponseEntity<>(userSports, HttpStatus.OK);
 	  }
 	  
+	  @RequestMapping(value = "/deleteUserSportById" , method = RequestMethod.POST)
+	  public void deleteUserSportsById(@RequestBody DeleteUserSportRequest request) {
+		userService.deleteUserSport(request);
+	  }
+	  
 	  @RequestMapping(value = "/getUserFriendsById/{userId}" , method = RequestMethod.GET)
-	  public ResponseEntity<List<UserFriends>> getAllUsers(@PathVariable Integer userId) {
-		  List<UserFriends> user = userService.getUserFriends(userId);  
+	  public ResponseEntity<List<User>> getAllUsers(@PathVariable Long userId) {
+		  List<User> user = userService.getUserFriends(userId);  
 	    return new ResponseEntity<>(user, HttpStatus.OK);
 	  }
 	  
