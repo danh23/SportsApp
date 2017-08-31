@@ -56,7 +56,7 @@ public class UserService {
 		}
 	}
 	
-	public List<User> getAllUsers(){
+	public List<User> getAllUsers(Long currentUserId){
 		return userRepository.findAll();
 	}
 	
