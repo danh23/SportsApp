@@ -11,6 +11,8 @@ export class ServerDataService{
   url: string = 'http://89.38.251.45:8080';
   setForUser: string = '/user/setUser';
   getForAllUsers: string = '/user/getAllUsers';
+  getUserEmail: string = '/user/getUserByEmail';
+  getAllSports: string = '/user/getAllSports'
   public items = [];
 
     constructor(private http:Http){
@@ -66,6 +68,20 @@ export class ServerDataService{
         //return this.items;
     }
  
+
+    getUserByEmail(email){
+      
+     let headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+      headers.append('Authorization', 'Basic dXNlcjpwYXNzd29yZA==');
+
+      let options = new RequestOptions({ headers: headers });
+
+      
+      return this.http.post(this.url + this.getUserEmail,email,options).map(
+        data => data.json());
+    
+    }
 
     
 }

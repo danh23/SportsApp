@@ -6,8 +6,32 @@
     <ion-title>Login</ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content padding>
-  <button ion-button full (click)="facebookLogin()" (hidden)="loggedIn()">Login</button>
-
- 
-</ion-content>
+<ion-content padding style="background-image:url('../www/assets/img/bg-pattern.png');">
+    
+        <ion-grid>
+          <ion-row>
+            <ion-col ><button ion-button block class="facebookButton" (click)="facebookLogin()">Login With Facebook</button></ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col><button ion-button block class="googleButton">Login With Google+</button></ion-col>
+          </ion-row>
+        </ion-grid>
+    
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <ion-list no-lines padding-top>
+          <ion-item>
+            <ion-input type="text" placeholder="Username"  formControlName="username"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input type="password" placeholder="Password"  formControlName="password"></ion-input>
+          </ion-item>
+        </ion-list>
+        <button ion-button block round color="secondary" (click)="simpleLogin()">Login</button>
+        </form>
+        <div padding-top>
+        <button ion-button block color="light" clear (click)="signupPage();">If new member ? SIGNUP</button>
+        <button ion-button block color="light" clear (click)="forgotPasswordPage();">Forgot Password</button>
+      </div>
+    
+    </ion-content>
+    

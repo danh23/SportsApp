@@ -82,8 +82,8 @@
     <plugin name="cordova-plugin-console" spec="^1.0.5" />
     <plugin name="cordova-plugin-device" spec="^1.1.4" />
     <plugin name="cordova-plugin-facebook4" spec="^1.9.1">
-        <variable name="APP_ID" value="1750822301882280" />
-        <variable name="APP_NAME" value="libertas" />
+        <variable name="APP_ID" value="1458461600876986" />
+        <variable name="APP_NAME" value="SportApp" />
     </plugin>
     <plugin name="cordova-plugin-file" spec="^4.3.3" />
     <plugin name="cordova-plugin-file-transfer" spec="^1.6.3" />

@@ -1,10 +1,10 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
-import { ListFriendsPage } from '../pages/listFriends/listFriends';
+import { ListSportsPage } from '../pages/listSports/listSports';
 import { ScrollPage } from '../pages/scroll/scroll';
 import { MapGooglePage } from '../pages/mapGoogle/mapGoogle';
 import { EventsPage } from '../pages/events/events';
@@ -13,12 +13,13 @@ import { LoginPage } from '../pages/login/login';
 import { ProfilePage } from "../pages/profile/profile";
 import { FacebookStorageService } from "../services/facebookStorageService";
 import { FacebookLoginService } from "../services/facebookLoginService";
+import { NativeStorage } from "@ionic-native/native-storage";
 
 
 @Component({
   templateUrl: 'app.html'
 })
-export class MyApp {
+export class MyApp implements OnInit{
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = ProfilePage;
@@ -29,22 +30,37 @@ export class MyApp {
     public statusBar: StatusBar,
      public splashScreen: SplashScreen,
      private facebookStorage: FacebookStorageService,
-     private facebookService:FacebookLoginService) {
+     private facebookService:FacebookLoginService,
+    public storage: NativeStorage) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'Friends', component: ListFriendsPage },
-      { title: 'Search new friends', component: ScrollPage },
-       { title: 'Map', component: MapGooglePage },
-       {title: 'Events', component: EventsPage},
-       {title: 'Profile', component: ProfilePage}
+      { title: 'Sporturile mele', component: ListSportsPage },
+      { title: 'Cauta prieteni noi', component: ScrollPage },
+       {title: 'Profil', component: ProfilePage},
+       {title: 'Login', component: LoginPage}
     ];
 
-    if (this.facebookService.loggedIn() == false)
-      this.rootPage = LoginPage;
+    
+     
   }
+
+ngOnInit(){
+
+ // console.log("aici");
+      this.storage.getItem('email').then(data => {
+    
+         /// console.log(data);
+          if (data != null){
+            this.rootPage = ProfilePage;
+          }
+          
+        },
+      err => {
+        console.log(err);
+      });
+}
 
   initializeApp() {
     this.platform.ready().then(() => {

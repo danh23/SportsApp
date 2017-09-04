@@ -25,22 +25,25 @@ export class FacebookStorageService{
         });
     }
       
-    getUserProfile(){
+   getUserProfile(){
        let token = 'EAAUudo2jiboBAJOSVpEMerbSDzgVXyodnyrKJCoiWrTZCNfQhJCXfOkp4DTr8XfvBH58YZBZBeDk21JJ4guX4olbcEXEXmpyuG8Dok5NHUtA3BQyzO6CRq1VbM8I48y7Lt5DE0L3bmNwmTESU9sdqVKopJXtMrECTFvjn0wZAAZDZD';//this.storage.getItem('token');
-     // var tokenValue;
-     this.accesToken = this.getTestParam();
+       //let token;
 
-          //  console.log(this.accesToken);
+      // console.log("a intrat la get user profile");
+       let promise;
+       //this.storage.getItem('token').then((token) => {
+        
+        //console.log(token);
+            let headers = new Headers();
+            headers.append('Content-Type', 'application/json');
+            headers.append('Authentication', 'Bearer '+ token);
+            let options = new RequestOptions({ headers: headers });
 
-
-
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        headers.append('Authentication', 'Bearer '+ token);
-        let options = new RequestOptions({ headers: headers });
-
-        return this.http.get("https://graph.facebook.com/v2.10/me?fields=picture,email,first_name,last_name&access_token=" + token, options)
+            return this.http.get("https://graph.facebook.com/v2.10/me?fields=email,first_name,last_name,picture&type=normal&access_token=" + token, options)
             .map((response1 => response1.json()));
+
+        
     }
+
     
 }

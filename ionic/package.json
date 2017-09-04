@@ -60,7 +60,7 @@
         "@ionic/app-scripts": "2.0.2",
         "@ionic/cli-plugin-cordova": "1.6.1",
         "@ionic/cli-plugin-ionic-angular": "1.4.1",
-        "ionic": "3.7.0",
+        "ionic": "3.9.2",
         "typescript": "2.3.4"
     },
     "description": "An Ionic project",
@@ -73,8 +73,8 @@
             "cordova-plugin-whitelist": {},
             "ionic-plugin-keyboard": {},
             "cordova-plugin-facebook4": {
-                "APP_ID": "1750822301882280",
-                "APP_NAME": "libertas"
+                "APP_ID": "1458461600876986",
+                "APP_NAME": "SportApp"
             },
             "cordova-plugin-inappbrowser": {},
             "cordova-plugin-nativestorage": {},

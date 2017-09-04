@@ -1,44 +1,36 @@
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>{{ 'SIGNUP_TITLE' | translate }}</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
-
-<ion-content>
-  <form (submit)="doSignup()">
-    <ion-list>
-
-      <ion-item>
-        <ion-label fixed>{{ 'NAME' | translate }}</ion-label>
-        <ion-input type="text" [(ngModel)]="account.name" name="name"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label fixed>{{ 'EMAIL' | translate }}</ion-label>
-        <ion-input type="email" [(ngModel)]="account.email" name="email"></ion-input>
-      </ion-item>
-
-      <!--
-      Want to add a Username? Here you go:
-
-      <ion-item>
-        <ion-label floating>Username</ion-label>
-        <ion-input type="text" [(ngModel)]="account.username" name="username"></ion-input>
-      </ion-item>
-      -->
-
-      <ion-item>
-        <ion-label fixed>{{ 'PASSWORD' | translate }}</ion-label>
-        <ion-input type="password" [(ngModel)]="account.password" name="password"></ion-input>
-      </ion-item>
-
-      <div padding>
-        <button ion-button color="primary" block>{{ 'SIGNUP_BUTTON' | translate }}</button>
-      </div>
-
-    </ion-list>
-  </form>
-</ion-content>
+    <ion-navbar>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Signup</ion-title>
+    </ion-navbar>
+  </ion-header>
+  <ion-content padding style="background-image:url('../www/assets/img/bg-pattern.png');">
+    
+    <form [formGroup]="signupForm" (ngSubmit)="doSignup()">
+          <ion-list no-lines padding-top>
+            <ion-item>
+              <ion-input type="text" placeholder="First Name"  formControlName="firstName"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input type="text" placeholder="Last Name"  formControlName="lastName"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input type="email" placeholder="Email"  formControlName="email"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input type="password" placeholder="Password"  formControlName="password"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input type="password" placeholder="Confirm Password"  formControlName="confirmPassword"></ion-input>
+            </ion-item>
+          </ion-list>
+          <button ion-button block round color="secondary">Signup</button>
+          <div padding>
+            <button ion-button block color="light" clear (click)="loginPage();">If already have an account ? LOGIN</button>
+            <button ion-button block color="light" clear (click)="forgotPasswordPage();">Forgot Password</button>
+         </div>
+    </form>  
+      </ion-content>
+      

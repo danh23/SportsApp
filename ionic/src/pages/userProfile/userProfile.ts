@@ -1,32 +1,26 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { NavController,ToastController} from 'ionic-angular';
-import { Content } from 'ionic-angular';
+import { Content, NavParams } from 'ionic-angular';
 import { MainPage } from '../../pages/pages';
 import { User } from '../../providers/user';
 import { TranslateService } from '@ngx-translate/core';
 import { Auth } from '@ionic/cloud-angular';
 import { Facebook,FacebookLoginResponse } from "@ionic-native/facebook";
 import { NativeStorage } from '@ionic-native/native-storage';
-import { Http,RequestOptions } from "@angular/http";
+import { Http,RequestOptions,Headers } from "@angular/http";
 import 'rxjs/add/operator/map';
 import { FacebookLoginService } from "../../services/facebookLoginService";
 import { FacebookStorageService } from "../../services/facebookStorageService";
-import { ProfilePage } from "../profile/profile";
 import { ServerDataService } from "../../services/serverDataService";
-import {FormGroup, FormBuilder, FormControl, Validators} from "@angular/forms";
-import { SignupPage } from "../signup/signup";
+import { EditProfilePage } from "../editProfile/editProfile";
+import { ListSportsPage } from "../listSports/listSports";
 
 @Component({
-  selector: 'page-login',
-  templateUrl: 'login.html',
+  selector: 'page-userProfile',
+  templateUrl: 'userProfile.html',
 })
-export class LoginPage{
+export class UserProfilePage implements OnInit {
   @ViewChild("contentRef") contentHandle: Content;
-
-  loginForm: FormGroup = new FormGroup ({
-    username: new FormControl(),
-    password: new FormControl()
-  });
 
   loggedIn:boolean;
 
@@ -41,40 +35,52 @@ export class LoginPage{
               private http:Http, 
               private facebookService:FacebookLoginService,
               private facebookStorage: FacebookStorageService,
-              private serviceData: ServerDataService){  
+              private serviceData: ServerDataService,
+              public serverData: ServerDataService,
+              private navParams: NavParams){  
     this.facebook.browserInit(this.APP_ID);
   }
 
-  facebookLogin(){
+  ngOnInit(){
+
+    let email = this.navParams.get('email');
+    //console.log("a intrat");
+    this.getUserProfile(email);
   }
 
-  simpleLogin(){
-    console.log(this.loginForm.controls.username.value);
+ getUserProfile(email){
 
-  }
+
+
+  this.serverData.getUserByEmail(email).subscribe(
+    (res:IUserData)=>{
+     // console.log(res);
+      this.userData.email = res.email;
+      this.userData.first_name = res.firstName;
+      //this.userData.picture = res.picture.data.url;
+      this.userData.facebookId = res.facebookId;
+      this.userData.city = "Bucuresti";
+      this.userData.last_name = res.lastName;
+      this.userData.username = res.username;
+    });
   
-  signupPage(){
-    this.navCtrl.setRoot(SignupPage);
   }
-  
 }
 
 class UserData {
   email: string;  
   first_name: string;
-  picture: string; 
+  last_name: string;
+  city: string;
+  facebookId: string;
   username: string;
-  last_name:string;
 }
 
 interface IUserData {
   email: string;  
-  first_name: string;
-  last_name: string;
-  picture: {
-    data: {
-      url: string;
-    }
-  }
+  firstName: string;
+  lastName: string;
+  facebookId: string;
+  username: string;
+  
 }
-

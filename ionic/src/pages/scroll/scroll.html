@@ -3,7 +3,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Scroll</ion-title>
+    <ion-title>Cauta prieteni noi</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -17,7 +17,7 @@
 
     
     <ion-card>
-      <img src="C:\Users\andre\Desktop\Libertas\ionic\www\assets\img\cover.jpg"/>
+        <img src="../www/assets/img/cover.jpg"  height="220"/>
     <ion-card-content>
     <ion-card-title>
    
@@ -25,8 +25,7 @@
     </ion-card-title>
     <p>{{item.city}}</p>
       <p>
-         <button ion-button item-right color="danger">Chat</button> 
-         <button ion-button item-right color="danger">View profile</button> 
+          <button ion-button round outline (click)="getUserProfile(item.email)">Profil</button> 
     </p>
   </ion-card-content>
 </ion-card>

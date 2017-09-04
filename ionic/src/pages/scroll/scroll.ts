@@ -3,6 +3,7 @@ import { NavController } from 'ionic-angular';
 import { Content } from 'ionic-angular';
 import { ServerDataService } from "../../services/serverDataService";
 //import { ServerData } from "../../services/serverDataService";
+import { UserProfilePage } from "../userProfile/userProfile";
 
 @Component({
   selector: 'page-scroll',
@@ -24,6 +25,13 @@ export class ScrollPage {
     });
   }
  
+
+  getUserProfile(email){
+    this.navCtrl.push(UserProfilePage, {
+      email : email
+    });
+  }
+
   ionViewDidEnter() {
     this.topOrBottom=this.contentHandle._tabsPlacement;
     this.contentBox=document.querySelector(".scroll-content")['style'];

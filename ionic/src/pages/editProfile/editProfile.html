@@ -10,7 +10,23 @@
 
   <ion-item>
     <img src="{{pathForImage(lastImage)}}" style="width: 100%" [hidden]="lastImage === null">
-    <h3 [hidden]="lastImage !== null">Please Select Image!</h3>
+    <h3 [hidden]="lastImage !== null">Upload imagine de profil</h3>
+  
+    <ion-toolbar color="primary">
+        <ion-buttons>
+          <button ion-button icon-left (click)="presentActionSheet()">
+            <ion-icon name="camera"></ion-icon>Select Image
+          </button>
+          <button ion-button icon-left (click)="uploadImage()" [disabled]="lastImage === null">
+            <ion-icon name="cloud-upload"></ion-icon>Upload
+          </button>
+        </ion-buttons>
+      </ion-toolbar>
+  </ion-item>
+
+  <ion-item>
+    <img src="{{pathForImage(lastImage)}}" style="width: 100%" [hidden]="lastImage === null">
+    <h3 [hidden]="lastImage !== null">Upload imagine de cover</h3>
   
     <ion-toolbar color="primary">
         <ion-buttons>
@@ -27,11 +43,24 @@
   <form [formGroup]="editProfileForm" (ngSubmit)="onSubmit()">
   <ion-item  *ngIf="userData">
     <ion-label fixed>Username</ion-label>
-    <ion-input type="text" [(ngModel)]="userData.first_name" formControlName="username" name="username"></ion-input>
+    <ion-input type="text" [(ngModel)]="userData.username" formControlName="username" name="username"></ion-input>
   </ion-item>
+  <ion-item  *ngIf="userData">
+    <ion-label fixed>Nume</ion-label>
+    <ion-input type="text" [(ngModel)]="userData.first_name" formControlName="firstName" name="firstName"></ion-input>
+  </ion-item>
+  <ion-item  *ngIf="userData">
+    <ion-label fixed>Prenume</ion-label>
+    <ion-input type="text" [(ngModel)]="userData.last_name" formControlName="lastName" name="lastName"></ion-input>
+  </ion-item>
+  <ion-item  *ngIf="userData">
+    <ion-label fixed>Oras</ion-label>
+    <ion-input type="text" [(ngModel)]="userData.city" formControlName="city" name="city"></ion-input>
+  </ion-item>
+ 
   </form>
 
-  <ion-item>
+ <!--  <ion-item>
     <ion-label>Sporturi</ion-label>
     <ion-select [(ngModel)]="toppings" multiple="true">
       <ion-option>Fotbal</ion-option>
@@ -41,11 +70,11 @@
       <ion-option>Popice</ion-option>
       <ion-option>Handbal</ion-option>
     </ion-select>
-  </ion-item>
+  </ion-item> -->
 
-  <p>
-    <button ion-button item-right color="danger" (click)="saveEditProfile()">Save</button> 
-    <button ion-button item-right color="danger" (click)="backButton()">Inapoi</button> 
-</p>
+  <ion-item>
+    <button ion-button round outline (click)="saveEditProfile()">Salveaza</button> 
+    <button ion-button round outline  (click)="backButton()">Inapoi</button> 
+  </ion-item>
 </ion-content>
 

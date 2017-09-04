@@ -5,7 +5,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ScrollPage } from '../pages/scroll/scroll';
-import { ListFriendsPage } from '../pages/listFriends/listFriends';
+import { ListSportsPage } from '../pages/listSports/listSports';
 import { MapGooglePage } from '../pages/mapGoogle/mapGoogle';
 import { EventsPage } from '../pages/events/events';
 import { User } from '../providers/user';
@@ -29,19 +29,22 @@ import { EditProfilePage } from "../pages/editProfile/editProfile";
 import { File } from '@ionic-native/file';
 import { Transfer, TransferObject } from '@ionic-native/transfer';
 import { FilePath } from '@ionic-native/file-path';
+import { SportsDataService } from "../services/sportsDataService";
+import { UserProfilePage } from "../pages/userProfile/userProfile";
+import { SignupPage } from "../pages/signup/signup";
 
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    ListFriendsPage,
+    ListSportsPage,
     ScrollPage,
-    MapGooglePage,
-    EventsPage,
     ProfilePage,
     LoginPage,
     EditProfilePage,
+    UserProfilePage,
+    SignupPage
   ],
   imports: [
     BrowserModule,
@@ -53,13 +56,13 @@ import { FilePath } from '@ionic-native/file-path';
   entryComponents: [
     MyApp,
     HomePage,
-    ListFriendsPage,
+    ListSportsPage,
     ScrollPage,
-    MapGooglePage,
-    EventsPage,
     ProfilePage,
     LoginPage,
-    EditProfilePage
+    EditProfilePage,
+    UserProfilePage,
+    SignupPage
   ],
   providers: [
     StatusBar,
@@ -70,6 +73,7 @@ import { FilePath } from '@ionic-native/file-path';
     FacebookStorageService,
     FacebookLoginService,
     ServerDataService,
+    SportsDataService,
     Geolocation,
     Facebook,
     NativeStorage,

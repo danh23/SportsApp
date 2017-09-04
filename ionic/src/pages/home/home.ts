@@ -48,13 +48,8 @@ export class HomePage implements OnInit {
   getUserProfile(){
 
 
-    this.facebookStorage.getUserProfile().subscribe(
-      (res:IUserData)=>{
-        
-        this.userData.email = res.email;
-        this.userData.first_name = res.first_name;
-        this.userData.picture = res.picture.data.url;
-      });
+    
+    
   }
 }
 

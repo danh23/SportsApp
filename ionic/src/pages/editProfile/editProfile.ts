@@ -35,7 +35,10 @@ export class EditProfilePage implements OnInit {
   lastImage: string = null;
   loading: Loading;
   editProfileForm: FormGroup = new FormGroup ({
-    username: new FormControl()
+    username: new FormControl(),
+    lastName: new FormControl(),
+    firstName: new FormControl(),
+    city: new FormControl()
   });
 
 
@@ -83,8 +86,10 @@ export class EditProfilePage implements OnInit {
    
     //console.log(this.editProfileForm);
     //console.log(this.editProfileForm.controls.username.value);
-    console.log(this.userData.first_name);
-    this.serviceData.setUser(this.editProfileForm.controls.username.value, this.userData.email, this.userData.facebookId, this.userData.first_name, this.userData.last_name, this.userData.city);
+    //console.log(this.userData.first_name);
+   // console.log(this.editProfileForm.controls.username.value,);
+    this.serviceData.setUser(this.editProfileForm.controls.username.value, this.userData.email, this.userData.facebookId, this.userData.first_name, this.userData.last_name, this.userData.city).subscribe(res=>{
+    });
     this.navCtrl.setRoot(ProfilePage);
   }
 

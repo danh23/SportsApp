@@ -11,7 +11,7 @@ import { NativeStorage } from "@ionic-native/native-storage";
 export class FacebookLoginService{
 
     
-  url: string = 'https://graph.facebook.com/oauth/access_token?client_id=1458461600876986&client_secret=7b5d127b2fe1c6acb12980455c1353c1&grant_type=client_credentials';
+  //url: string = 'https://graph.facebook.com/oauth/access_token?client_id=1458461600876986&client_secret=7b5d127b2fe1c6acb12980455c1353c1&grant_type=client_credentials';
     constructor(private http:Http, private iab: InAppBrowser, private storage: NativeStorage){
         
     }
@@ -24,34 +24,32 @@ facebookLogin() {
          
         let loginWindow: InAppBrowserObject = this.iab.create(oauthLoginUrl, '_blank', 'location=no,toolbar=no');
         
-       // console.log(this.storage.getItem('token'));
+        loginWindow.show();
+        //console.log(this.storage.getItem('token'));
 
-        if (this.storage.getItem('token') == null){
+       // if (this.storage.getItem('token') == null){
 
                 //console.log("Login 3");
-                loginWindow.on('loadstop').subscribe((event) => {
+                loginWindow.on('loadstart').subscribe((event) => {
                 
-                    //console.log(event.url);
+                   
                         let url = event.url;
+                        console.log(event);
                         var codeIndex = url.indexOf("code=");
                         var code = url.substring(codeIndex + 5, url.length);
-                        //console.log(code);
+                        //console.log("aici");
+                        console.log(code);
                         //
                         this.getAccessToken(code, loginWindow);
                 });
-        }
+       // }
     }
    
 
-    loggedIn(){
-//console.log("a intrat");
-//console.log(this.storage.getItem('token'));
-var token = this.storage.getItem('token');
-
-         if (token == null)
-            return false;
-         return true;
-    }
+loggedIn(){
+        return this.storage.getItem('token');
+       
+}
   
 
 
@@ -59,12 +57,14 @@ var token = this.storage.getItem('token');
     
         var oauthTokenUrl = 'https://graph.facebook.com/oauth/access_token?redirect_uri=http://localhost/callback/&client_id=1458461600876986&client_secret=7b5d127b2fe1c6acb12980455c1353c1&code='+ authorizationCode + '&grant_type=authorization_code';
         
+        console.log("a intrat la access token");
         loginWindow.close();
 
-      //  console.log("intrat");
+        console.log(authorizationCode);
         
         this.http.get(oauthTokenUrl).map((response => response.json())).subscribe((res) => {   
-        this.storage.setItem('token', JSON.stringify(res.access_token));   
+            console.log(res);
+             this.storage.setItem('token', res);   
         });
         
     }
