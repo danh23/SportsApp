@@ -6,8 +6,6 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ScrollPage } from '../pages/scroll/scroll';
 import { ListSportsPage } from '../pages/listSports/listSports';
-import { MapGooglePage } from '../pages/mapGoogle/mapGoogle';
-import { EventsPage } from '../pages/events/events';
 import { User } from '../providers/user';
 import { LoginPage } from '../pages/login/login';
 import { IonicStorageModule } from '@ionic/storage';
@@ -32,6 +30,7 @@ import { FilePath } from '@ionic-native/file-path';
 import { SportsDataService } from "../services/sportsDataService";
 import { UserProfilePage } from "../pages/userProfile/userProfile";
 import { SignupPage } from "../pages/signup/signup";
+import { MenuPage } from "../pages/menu/menu";
 
 
 @NgModule({
@@ -44,7 +43,8 @@ import { SignupPage } from "../pages/signup/signup";
     LoginPage,
     EditProfilePage,
     UserProfilePage,
-    SignupPage
+    SignupPage,
+    MenuPage,
   ],
   imports: [
     BrowserModule,

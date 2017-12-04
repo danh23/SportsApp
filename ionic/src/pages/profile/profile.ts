@@ -1,7 +1,6 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { NavController,ToastController} from 'ionic-angular';
 import { Content, NavParams } from 'ionic-angular';
-import { MainPage } from '../../pages/pages';
 import { User } from '../../providers/user';
 import { TranslateService } from '@ngx-translate/core';
 import { Auth } from '@ionic/cloud-angular';
